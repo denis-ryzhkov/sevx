@@ -62,7 +62,7 @@ Worker may subscribe to zero or more keys:
 
     > 20161231235959123456uN22 recv {"pattern": {"obj": "user", "act": "updated"}, "queue": "opt.service2.events.test.on_event.act=updated.obj=user"}
     < 20161231235959123456uN22 ok
-    < 20161231235959123456uN22 ok 20161231235959123456uN1q {"src": "service1", "act": "updated", "obj": "user", "data": {"id": 42, "name": "Kate"}}
+    < 20161231235959123456uN22 ok {"id": "20161231235959123456uN1q", "src": "service1", "act": "updated", "obj": "user", "data": {"id": 42, "name": "Kate"}}
 
 Default queue name is composed from full path to func + sorted pattern,  
 e.g. "opt.service2.events.test.on_event.act=updated.obj=user".  
@@ -81,7 +81,7 @@ So workers of the same type share the same queue and the same event will not be 
 
     > 20161231235959123456uN33 recv {"manual_ack": true, "delete_queue_when_unused": 5.42, "queue": "opt.service2.events.test.on_event.act=updated.obj=user", "pattern": {"obj": "user", "act": "updated"}}
     < 20161231235959123456uN33 ok 
-    < 20161231235959123456uN33 ok 20161231235959123456uN1q {"retry": 1, "src": "service1", "act": "updated", "obj": "user", "data": {"id": 42, "name": "Kate"}}
+    < 20161231235959123456uN33 ok {"id": "20161231235959123456uN1q", "retry": 1, "src": "service1", "act": "updated", "obj": "user", "data": {"id": 42, "name": "Kate"}}
 
         # Acknowledge that this (or all) events were processed by this receiver.
         event.ack()             # 20161231235959123456uN44 ack {"receiver_id": "20161231235959123456uN33", "event_id": "20161231235959123456uN1q"}
@@ -132,6 +132,6 @@ internal
 end
 ---
 
-sevx version 0.1.0  
+sevx version 0.1.1  
 Copyright (C) 2016 by Denis Ryzhkov <denisr@denisr.com>  
 MIT License, see http://opensource.org/licenses/MIT
